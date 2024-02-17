@@ -1,3 +1,5 @@
+import React from "react";
+import ReactDOM from "react-dom/client";
 {
   /* <div id="root">
   <h1>Hello from react</h1>
