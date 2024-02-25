@@ -1,6 +1,3 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-
 const restoList = [
   {
     type: "restaurant",
@@ -1943,62 +1940,4 @@ const restoList = [
   },
 ];
 
-const Header = () => {
-  return (
-    <div className="header">
-      <div className="logo-container">
-        <img
-          className="logo"
-          src="https://i.pinimg.com/originals/39/96/57/39965743eb30634afdc5906133e19740.png"
-        />
-      </div>
-      <div className="nav-items">
-        <ul>
-          <li>Home</li>
-          <li>About Us</li>
-          <li>Contact Us</li>
-          <li>Cart</li>
-        </ul>
-      </div>
-    </div>
-  );
-};
-
-const RestoCard = (props) => {
-  const { resData } = props;
-  const { name, o2FeaturedImage, rating, cft } = resData?.info;
-
-  return (
-    <div className="resto-card">
-      <img className="food-image" src={o2FeaturedImage.url}></img>
-      <h3 className="resto-name">{name}</h3>
-      <h4 className="resto-rating">{rating.aggregate_rating} rating</h4>
-      <h4 className="time">{cft.text}</h4>
-    </div>
-  );
-};
-
-const Body = () => {
-  return (
-    <div className="body">
-      <div className="search">Search</div>
-      <div className="resto-container">
-        {restoList.map((restaurant) => (
-          <RestoCard key={restaurant.info.resId} resData={restaurant} />
-        ))}
-      </div>
-    </div>
-  );
-};
-
-const AppLayout = () => {
-  return (
-    <div className="App">
-      <Header />
-      <Body />
-    </div>
-  );
-};
-
-const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(<AppLayout />);
+export default restoList;
