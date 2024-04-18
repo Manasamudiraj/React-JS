@@ -11,6 +11,7 @@ const Body = () => {
   }, []);
 
   const fetchData = async () => {
+    //if you want to make api call without cors plugin, you can append this "https://corsproxy.io/?rest_of_url" 
     const data = await fetch(
       "https://www.swiggy.com/dapi/restaurants/list/v5?lat=17.4360207&lng=78.3765674&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
     );
@@ -65,7 +66,7 @@ const Body = () => {
       </div>
       <div className="resto-container">
         {filteredRestaurants.map((restaurant) => (
-          <RestoCard key={restaurant.info.resId} resData={restaurant} />
+          <RestoCard key={restaurant.info.id} resData={restaurant} />
         ))}
       </div>
     </div>
