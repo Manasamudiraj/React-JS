@@ -2,6 +2,7 @@ import RestoCard from "./RestoCard";
 import { useEffect, useState } from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
+import useOnlineStatus from "../utils/useOnlineStatus";
 const Body = () => {
   const [listOfRestaurants, setListOfRestaurants] = useState([]);
   const [filteredRestaurants, setFilteredRestaurants] = useState([]);
@@ -12,7 +13,7 @@ const Body = () => {
   }, []);
 
   const fetchData = async () => {
-    //if you want to make api call without cors plugin, you can append this "https://corsproxy.io/?rest_of_url" 
+    //if you want to make api call without cors plugin, you can append this "https://corsproxy.io/?rest_of_url"
     const data = await fetch(
       "https://www.swiggy.com/dapi/restaurants/list/v5?lat=17.4360207&lng=78.3765674&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
     );
@@ -28,6 +29,10 @@ const Body = () => {
         ?.restaurants
     );
   };
+  const onlineStatus = useOnlineStatus();
+
+  if (!onlineStatus)
+    return <h1>You are offline, please check your internet connection</h1>;
 
   return listOfRestaurants.length === 0 ? (
     <Shimmer />
@@ -67,7 +72,10 @@ const Body = () => {
       </div>
       <div className="resto-container">
         {filteredRestaurants.map((restaurant) => (
-         <Link to={"/restaurant/"+restaurant.info.id}> <RestoCard key={restaurant.info.id} resData={restaurant} /></Link>
+          <Link to={"/restaurant/" + restaurant.info.id}>
+            {" "}
+            <RestoCard key={restaurant.info.id} resData={restaurant} />
+          </Link>
         ))}
       </div>
     </div>
