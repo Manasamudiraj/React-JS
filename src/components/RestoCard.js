@@ -4,19 +4,19 @@ const RestoCard = (props) => {
     resData?.info;
 
   return (
-    <div className="resto-card">
+    <div className="m-4 p-4 w-[250px] bg-gray-100 rounded-lg shadow-lg hover:bg-gray-200">
       <img
-        className="food-image"
+        className="rounded-lg"
         src={
           "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/" +
           cloudinaryImageId
         }
       ></img>
-      <h3 className="resto-name">{name}</h3>
-      <h4 className="resto-name">{cuisines.join(", ")}</h4>
-      <h4 className="resto-rating">{avgRating} stars</h4>
-      <h4 className="time">{sla.slaString}</h4>
-      <h4 className="cost-for-two">{costForTwo}</h4>
+      <h3 className="font-bold py-4 text-lg">{name}</h3>
+      <h4 className="py-2 text-sm">{cuisines.join(", ")}</h4>
+      <h4 className="py-2 text-sm">{avgRating} stars</h4>
+      <h4 className="py-2 text-sm">{sla.slaString}</h4>
+      <h4 className="py-2 text-sm">{costForTwo}</h4>
     </div>
   );
 };

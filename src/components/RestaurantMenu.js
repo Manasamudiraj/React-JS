@@ -18,17 +18,19 @@ const RestaurantMenu = () => {
     resInfo.cards[4].groupedCard.cardGroupMap.REGULAR.cards[index].card.card
       .itemCards;
   return (
-    <div className="resto-menu-container">
-      <h2>{resInfo.cards[0].card.card.text}</h2>
-      <h3>Menu</h3>
-      <div className="menu-items-container">
-        <ul className="custom-ul">
+    <div className="flex flex-col justify-center items-center m-4">
+      <h2 className="font-bold text-xl m-3">
+        {resInfo.cards[0].card.card.text}
+      </h2>
+      <h3 className="text-lg">Menu</h3>
+      <div className="m-5 p-5 flex items-center">
+        <ul className="">
           {recommendData.map((item) => (
             <div>
-              <li className="menu-item">
+              <li className="py-3">
                 <b>{item.card.info.name}</b>
               </li>
-              <p className="price">
+              <p className="py-3">
                 Rs.
                 {item.card.info.defaultPrice / 100 ||
                   item.card.info.price / 100}
