@@ -21,4 +21,17 @@ const RestoCard = (props) => {
   );
 };
 
+
+//Higher Order Component
+export const withPromotedLabel = (RestoCard) => {
+  return (props) => {
+    return (
+      <div>
+        <label className="bg-black rounded-lg text-white m-2 p-2 absolute">Promoted</label>
+        <RestoCard {...props} />
+      </div>
+    );
+  };
+};
+
 export default RestoCard;

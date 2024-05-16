@@ -1,8 +1,9 @@
-import RestoCard from "./RestoCard";
-import { useEffect, useState } from "react";
+import RestoCard, { withPromotedLabel } from "./RestoCard";
+import { useEffect, useState, useContext } from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
+import UserContext from "../utils/UserContext";
 const Body = () => {
   const [listOfRestaurants, setListOfRestaurants] = useState([]);
   const [filteredRestaurants, setFilteredRestaurants] = useState([]);
@@ -30,6 +31,10 @@ const Body = () => {
     );
   };
   const onlineStatus = useOnlineStatus();
+
+  const RestaurantPromoted = withPromotedLabel(RestoCard);
+
+  const { loggedIn, setUserName } = useContext(UserContext);
 
   if (!onlineStatus)
     return <h1>You are offline, please check your internet connection</h1>;
@@ -69,12 +74,29 @@ const Body = () => {
         >
           Top rated restaurants
         </button>
+
+        {/* Updating the context value everywhere */}
+        <div className="search m-4 p-4">
+          <label>UserName</label>
+          <input
+            type="text"
+            className="border border-solid border-black"
+            value={loggedIn}
+            onChange={(e) => setUserName(e.target.value)}
+          />
+        </div>
+
       </div>
       <div className="flex flex-wrap">
         {filteredRestaurants.map((restaurant) => (
           <Link to={"/restaurant/" + restaurant.info.id}>
             {" "}
-            <RestoCard key={restaurant.info.id} resData={restaurant} />
+            {/* true should include variable from api which has promoted value */}
+            {true ? (
+              <RestaurantPromoted resData={restaurant} />
+            ) : (
+              <RestoCard key={restaurant.info.id} resData={restaurant} />
+            )}
           </Link>
         ))}
       </div>
