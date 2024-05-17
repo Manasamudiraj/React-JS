@@ -7,14 +7,16 @@ import Contact from "./components/Contact";
 import Error from "./components/Error";
 import RestaurantMenu from "./components/RestaurantMenu";
 import UserContext from "./utils/UserContext";
+import { Provider } from "react-redux";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
+import appStore from "./utils/appStore";
+import Cart from "./components/Cart";
 // import Grocery from "./components/Grocery"; // normal import
 
 //this is dynamic import or lazy loading or code splitting
 const Grocery = lazy(() => import("./components/Grocery"));
 const AppLayout = () => {
   const [userName, setUserName] = useState("");
-
   useEffect(() => {
     //fetch call or api call to get authentication details
     const data = {
@@ -24,14 +26,17 @@ const AppLayout = () => {
   }, []);
 
   return (
-    // Context Provider used to set the value of context from api data
-    //Wrap the components which needs context(here i wanted in whole application)
-    <UserContext.Provider value={{ loggedIn: userName, setUserName }}>
-      <div className="App">
-        <Header />
-        <Outlet />
-      </div>
-    </UserContext.Provider>
+    // connecting app to store
+    <Provider store={appStore}>
+       {/* Context Provider used to set the value of context from api data 
+       //Wrap the components which needs context(here i wanted in whole application) */}
+      <UserContext.Provider value={{ loggedIn: userName, setUserName }}>
+        <div className="App">
+          <Header />
+          <Outlet />
+        </div>
+      </UserContext.Provider>
+    </Provider>
   );
 };
 const appRouter = createBrowserRouter([
@@ -62,6 +67,10 @@ const appRouter = createBrowserRouter([
       {
         path: "/restaurant/:resId",
         element: <RestaurantMenu />,
+      },
+      {
+        path: "/cart",
+        element: <Cart />,
       },
     ],
     errorElement: <Error />,
