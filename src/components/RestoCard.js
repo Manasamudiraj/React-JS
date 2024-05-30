@@ -4,7 +4,7 @@ const RestoCard = (props) => {
     resData?.info;
 
   return (
-    <div className="m-4 p-4 w-[250px] bg-gray-100 rounded-lg shadow-lg hover:bg-gray-200">
+    <div data-testid="res-card" className="m-4 p-4 w-[250px] bg-gray-100 rounded-lg shadow-lg hover:bg-gray-200">
       <img
         className="rounded-lg"
         src={
@@ -21,13 +21,14 @@ const RestoCard = (props) => {
   );
 };
 
-
 //Higher Order Component
 export const withPromotedLabel = (RestoCard) => {
   return (props) => {
     return (
       <div>
-        <label className="bg-black rounded-lg text-white m-2 p-2 absolute">Promoted</label>
+        <label className="bg-black rounded-lg text-white m-2 p-2 absolute">
+          Promoted
+        </label>
         <RestoCard {...props} />
       </div>
     );

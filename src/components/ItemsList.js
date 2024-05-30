@@ -10,7 +10,10 @@ const ItemsList = ({ items }) => {
   return (
     <div>
       {items.map((item) => (
-        <div className=" p-2 m-2 border-gray-200 border-b-2 text-left flex justify-between">
+        <div
+          data-testid="food-item"
+          className=" p-2 m-2 border-gray-200 border-b-2 text-left flex justify-between"
+        >
           <div className="w-9/12">
             <div className="p-2">
               <span>{item.card.info.name}</span>

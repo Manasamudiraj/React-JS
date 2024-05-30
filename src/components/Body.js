@@ -47,6 +47,7 @@ const Body = () => {
         <div className="search m-4 p-4">
           <input
             type="text"
+            data-testid="search-input"
             className="border border-solid border-black"
             value={searchText}
             onChange={(e) => setSearchText(e.target.value)}
@@ -90,7 +91,6 @@ const Body = () => {
       <div className="flex flex-wrap">
         {filteredRestaurants.map((restaurant) => (
           <Link to={"/restaurant/" + restaurant.info.id}>
-            {" "}
             {/* true should include variable from api which has promoted value */}
             {true ? (
               <RestaurantPromoted resData={restaurant} />
